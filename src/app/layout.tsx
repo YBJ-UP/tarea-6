@@ -28,10 +28,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="flex gap-10 justify-center text-2xl">
-          <Link href='/'>Hogar</Link>
-          <Link href='/categorias'>Categorias</Link>
-          <Link href='/usuarios'>Usuarios</Link>
+        <nav className="flex gap-10 justify-center text-2xl bg-amber-700 py-5">
+          <Link href='/' className="hover:font-bold">Hogar</Link>
+          <Link href='/categorias' className="hover:font-bold">Categorias</Link>
+          <Link href='/usuarios' className="hover:font-bold">Usuarios</Link>
         </nav>
         {children}
       </body>

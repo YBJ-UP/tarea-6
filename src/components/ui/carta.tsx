@@ -6,6 +6,7 @@ export default function Carta({ usuario }: { usuario:Omit<usuario,'pw_hash'> }) 
         <Link href={`/usuarios/${usuario.id}`} className="bg-amber-600 flex flex-col gap-2.5 p-5 rounded-2xl">
             <h2 className="text-xl">Nombre: {usuario.nombre}</h2>
             <p>Correo: {usuario.email}</p>
+            <p>ID: {usuario.id}</p>
         </Link>
     )
 }
