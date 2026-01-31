@@ -1,4 +1,4 @@
-export default async function page( { params } : { params:Promise<{ categoria:string }> } ) {
+export default async function page( { params } : { params:Promise<{ categoria:number }> } ) {
     const { categoria } = await params
 
     return (

@@ -1,4 +1,4 @@
-export default async function ( { params }: { params:Promise<{ usuario:string }> } ) {
+export default async function ( { params }: { params:Promise<{ usuario:number }> } ) {
     const { usuario } = await params
 
     return (
