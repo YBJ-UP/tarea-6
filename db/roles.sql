@@ -1,0 +1,13 @@
+DROP ROLE IF EXISTS usuario;
+
+CREATE ROLE usuario WITH 
+LOGIN 
+PASSWORD '12345678'
+NOSUPERUSER
+NOCREATEDB
+NOCREATEROLE
+INHERIT;
+
+GRANT USAGE ON SCHEMA public TO usuario;
+
+-- dar permiso para los reportes (cuando los haga)

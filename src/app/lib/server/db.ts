@@ -1,9 +1,12 @@
-import { Client } from "pg";
-import config from "./config";
+import { Pool } from "pg";
 
-export function getClient(): Client {
-    const client = new Client({
-        connectionString: config.POSTGRES_URL
-    })
-    return client
-}
+const connectionPool = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+    user: process.env.POSTGRES_USER,
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DATABASE,
+    password: process.env.POSTGRES_PASSWORD,
+    port: 5432,
+})
+
+export default connectionPool
