@@ -2,6 +2,8 @@ import Carta from "@/components/ui/carta"
 import { users } from "../../../db/cosas"
 import { query } from "@/lib/db"
 
+export const dynamic = 'force-dynamic'
+
 export default async function page() {
     const data = await query('SELECT * FROM ordenes') //rechaza la conexion
     return (
