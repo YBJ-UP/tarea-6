@@ -1,10 +1,11 @@
 import Link from "next/link"
-import { users } from "../../../../db/cosas"
 import usuario from "@/shared/interfaces/usuario"
+import { query } from "@/lib/db"
 
 export default async function ( { params }: { params:Promise<{ usuario_id:number }> } ) {
     const { usuario_id } = await params
-    const usuario:Omit<usuario, 'pw_hash'>|undefined = users.find((usuario) => usuario.id == usuario_id)
+    const res = await query('SELECT nombre, email FROM usuarios WHERE usuarios.id = $1;', [usuario_id])
+    const usuario:usuario = res.rows[0]
     if (!usuario) {
         throw new Error("Error al conseguir el usuario")
     }
