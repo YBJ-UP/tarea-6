@@ -10,4 +10,4 @@ const connectionPool = new Pool({
     port: 5432,
 })
 
-module.exports = connectionPool
+export const query = (text:string, params?: any[]) => connectionPool.query(text, params)
