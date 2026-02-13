@@ -26,7 +26,7 @@ export default async function reporte_2 (props: { searchParams?:Promise<{[key:st
                 </div>
             </div>
 
-            <Busqueda />
+            <Busqueda tipo="nombre"/>
 
             <div className="my-5">
                 <div className="grid grid-cols-6 items-center border-2 border-amber-50 p-2">
