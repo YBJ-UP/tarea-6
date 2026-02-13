@@ -17,3 +17,5 @@ CREATE OR REPLACE VIEW vw_ventas_categorias AS
     JOIN ordenes o ON o.id = od.orden_id
     GROUP BY c.nombre
     ORDER BY COUNT( DISTINCT o.id ) DESC;
+
+SELECT * FROM vw_ventas_categorias;
