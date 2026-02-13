@@ -3,7 +3,8 @@
 --Grain: Cada fila es un usuario
 --Métricas: Cantidad de compras realizadas y el dinero gastado
 --¿Por qué GROUP BY/HAVING?
---  ahi voy
+--  Se utiliza GROUP BY para que agrupe filas con los mismos valores segun lo que se especifica
+-- Se utiliza HAVING para asegurarse de que
 CREATE OR REPLACE VIEW vw_ventas_usuarios AS
     SELECT
         u.nombre,
