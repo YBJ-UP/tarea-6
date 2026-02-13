@@ -10,7 +10,7 @@ CREATE OR REPLACE VIEW vw_ventas_categorias AS
         COALESCE( COUNT( DISTINCT o.id ), 0 ) as ordenes_totales,
         SUM( CASE WHEN o.status = 'cancelado' THEN 1 ELSE 0 END ) AS ordenes_canceladas,
         SUM( CASE WHEN o.status != 'cancelado' THEN od.subtotal ELSE 0 END ) AS total_generado,
-        COALESCE( ROUND( SUM( CASE WHEN o.status != 'cancelado' THEN 1 ELSE 0 END )/NULLIF( COUNT( DISTINCT o.id ), 0) , 2 ), 0 ) AS promedio_exitos
+        COALESCE( ROUND( SUM( DISTINCT CASE WHEN o.status != 'cancelado' THEN 1 ELSE 0 END )/NULLIF( COUNT( DISTINCT o.id ), 0) , 2 ), 0 ) AS promedio_exitos
     FROM categorias c
     LEFT JOIN productos p ON c.id = p.categoria_id
     LEFT JOIN orden_detalles od ON p.id = od.producto_id
