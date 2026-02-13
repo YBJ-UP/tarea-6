@@ -1,13 +1,18 @@
 import Filtrado from "@/components/ui/filtrado";
-import { getKPI, getProgramas, getReporte1, reporte1 } from "@/shared/interfaces/reporte_1";
+import Paginacion from "@/components/ui/paginacion";
+import { getKPI, getCategorias, getReporte1, reporte1Type } from "@/shared/interfaces/reporte_1";
 import { Suspense } from "react";
 
 export const dynamic = 'force-dynamic';
 
 export default async function reporte_1 (props: { searchParams?:Promise<{[key:string]: string}> }) {
-    const reporte:reporte1[] = await getReporte1(props)
+    const res = await getReporte1(props)
+    if (!res.ok) {
+        throw new Error(res.mensaje)
+    }
+    const { data, pagination } = res
     const kpi = await getKPI()
-    const programas:{programa:string}[] = await getProgramas()
+    const categorias:{categoria:string}[] = await getCategorias()
     return (
         <div className="flex flex-col m-10">
             <div className="flex gap-20 items-center">
@@ -23,7 +28,7 @@ export default async function reporte_1 (props: { searchParams?:Promise<{[key:st
             </div>
 
             <Suspense fallback={<></>}>
-                <Filtrado programas={programas}/>
+                <Filtrado categorias={categorias}/>
             </Suspense>
 
             <div className="grid grid-cols-5 items-center border-2 border-amber-50 p-2">
@@ -33,15 +38,18 @@ export default async function reporte_1 (props: { searchParams?:Promise<{[key:st
                 <p>PROMEDIO</p>
                 <p>REPROBADOS</p>
             </div>
-            {reporte.map((rep, key:number) => (
+            {data.map((rep:reporte1Type, key:number) => (
                 <div key={key} className="grid grid-cols-5 items-center border-2 border-amber-50 p-2">
-                    <p>{rep.curso}</p>
-                    <p>{rep.periodo}</p>
-                    <p>{rep.programa}</p>
-                    <p>{rep.promedio}</p>
-                    <p>{rep.reprobados}</p>
+                    <p>{rep.categoria}</p>
+                    <p>{rep.nombre}</p>
+                    <p>{rep.stock_disponible}</p>
+                    <p>{rep.precio}</p>
+                    <p>{rep.unidades_vendidas}</p>
+                    <p>{rep.estado}</p>
                 </div>
             ))}
+
+            <Paginacion paginaActual={pagination.pagina} paginasTotales={pagination.totalPaginas} />
         </div>
     )
 }

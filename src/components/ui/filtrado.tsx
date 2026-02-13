@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
-export default function filtrado ({programas}:{programas:{programa:string}[]}) {
+export default function filtrado ({categorias}:{categorias:{categoria:string}[]}) {
     const parametros = useSearchParams()
     const params = new URLSearchParams(parametros)
     const ruta = usePathname()
@@ -10,19 +10,9 @@ export default function filtrado ({programas}:{programas:{programa:string}[]}) {
 
     function manejarPrograma(input:string) {
         if (input){
-            params.set("programa", input)
+            params.set("categoria", input)
         } else {
-            params.delete('programa')
-        }
-
-        replace(`${ruta}?${params.toString()}`)
-    }
-
-    function manejarPeriodo(input:number) {
-        if (input && input > 0) {
-            params.set('periodo', input.toString())
-        } else {
-            params.delete('periodo')
+            params.delete('categoria')
         }
 
         replace(`${ruta}?${params.toString()}`)
@@ -34,14 +24,10 @@ export default function filtrado ({programas}:{programas:{programa:string}[]}) {
                 <label htmlFor="programa">Seleccionar programa:</label>
                 <select name="programa" id="programa" className="bg-black border-2 rounded-2xl px-5 py-2" onChange={(e) => {manejarPrograma(e.target.value.trim())}}>
                     <option value="">-</option>
-                    {programas.map((programa, key:number) => (
-                        <option key={key} value={programa.programa}>{programa.programa}</option>
+                    {categorias.map((categoria, key:number) => (
+                        <option key={key} value={categoria.categoria}>{categoria.categoria}</option>
                     ))}
                 </select>
-            </div>
-            <div className="flex gap-5 items-center">
-                <label htmlFor="periodo">Seleccionar periodo:</label>
-                <input type="number" name="periodo" id="periodo" placeholder="0" className="bg-black border-2 rounded-2xl px-5 py-2" onChange={(e) => {manejarPeriodo(Number(e.target.value.trim()))}}/>
             </div>
         </div>
     )

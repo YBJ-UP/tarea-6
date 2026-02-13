@@ -1,23 +1,37 @@
-import Link from "next/link"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface paginaInterfaz {
     paginaActual: number,
-    paginasTotales: number,
-    ruta: string
+    paginasTotales: number
 }
 
-export default async function paginacion({ paginaActual, paginasTotales, ruta }:paginaInterfaz) {
+export default async function paginacion({ paginaActual, paginasTotales }:paginaInterfaz) {
+    const parametros = useSearchParams()
+    const params = new URLSearchParams(parametros)
+    const ruta = usePathname()
+    const { replace } = useRouter()
     const primeraPagina: boolean = paginaActual == 1
     const ultimaPagina: boolean = paginaActual == paginasTotales
+
+    function paginaAnterior() {
+        params.set('page', (paginaActual-1).toString())
+        replace(`${ruta}?${params.toString()}`)
+    }
+
+    function paginaSiguiente() {
+        params.set('page', (paginaActual+1).toString())
+        replace(`${ruta}?${params.toString()}`)
+    }
+
     return (
         <div className="flex justify-center">
             <div className="grid grid-cols-3 justify-center gap-6">
                 <div>
-                    { !primeraPagina && <Link href={`${ruta}?page=${paginaActual-1}`}>Página anterior</Link> }
+                    { !primeraPagina && <button onClick={paginaAnterior}>Página anterior</button> }
                 </div>
                 <p>{paginaActual} de {paginasTotales}</p>
                 <div>
-                    { !ultimaPagina && <Link href={`${ruta}?page=${paginaActual+1}`}>Siguiente página</Link> }
+                    { !ultimaPagina && <button onClick={paginaSiguiente}>Siguiente página</button> }
                 </div>
             </div>
         </div>
