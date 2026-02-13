@@ -11,7 +11,9 @@ CREATE OR REPLACE VIEW vw_ranking_productos AS
         SUM( od.subtotal ) AS total_generado,
         RANK() OVER ( ORDER BY SUM( od.subtotal ) DESC ) AS ranking,
         p.stock AS stock_disponible,
-        p.precio * COALESCE( SUM( od.cantidad ), 0 ) AS dinero_generado
     FROM productos p
     JOIN categorias c ON p.categoria_id = c.id
-    JOIN orden_detalles on p.id = od.producto_id
+    JOIN orden_detalles od on p.id = od.producto_id
+    GROUP BY p.nombre, c.nombre, p.stock;
+
+SELECT * FROM vw_ranking_productos;
