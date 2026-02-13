@@ -21,7 +21,6 @@ CREATE OR REPLACE VIEW vw_stock_vendido AS
     FROM productos p
     JOIN orden_detalles od ON p.id = od.producto_id
     GROUP BY p.codigo, p.nombre, p.stock, p.precio
-    HAVING COALESCE( SUM( od.cantidad ), 0 ) > 0
     ORDER BY p.stock DESC;
 
 SELECT * FROM vw_stock_vendido;
