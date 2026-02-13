@@ -3,6 +3,7 @@
 --Grain: Cada fila representa un producto
 --Métricas: La cantidad comprada y el dinero generado
 --¿Por qué GROUP BY/HAVING?
+--  Se utiliza GROUP BY para que agrupe filas con los mismos valores segun lo que se especifica
 CREATE OR REPLACE VIEW vw_stock_vendido AS
     SELECT
         p.codigo,
