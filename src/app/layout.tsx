@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header>Dashboard de negocio</header>
+        <header className="text-xl font-bold px-10 py-5 bg-emerald-700">Dashboard de negocio</header>
         {children}
       </body>
     </html>
