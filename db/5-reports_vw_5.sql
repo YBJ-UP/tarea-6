@@ -19,8 +19,8 @@ CREATE OR REPLACE VIEW vw_usuarios_pagudos AS
     FROM usuarios u
     JOIN ordenes o ON u.id = o.usuario_id
     GROUP BY u.nombre, u.email
-    ORDER BY SUM( o.total )
-    HAVING SUM( o.total ) > (SELECT total_gastado FROM promedio_tienda);
+    HAVING SUM( o.total ) > (SELECT total_gastado FROM promedio_tienda)
+    ORDER BY SUM( o.total );
 
 SELECT * FROM vw_usuarios_pagudos;
 
