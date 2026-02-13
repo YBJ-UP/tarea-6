@@ -16,13 +16,13 @@ export default async function reporte_2 (props: { searchParams?:Promise<{[key:st
 
             <div className="flex gap-20 items-center">
                 <div>
-                    <h1 className="text-2xl font-bold">Carga del maestro</h1>
-                    <p>Cuántos grupos y alumnos están bajo la tutela de cada profesor.</p>
+                    <h1 className="text-2xl font-bold">Ventas por usuarios</h1>
+                    <p>Usuarios ordenados por quienes han gastado la mayor cantidad de dinero.</p>
                 </div>
                 
-                <div className=" flex gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">
+                <div className="flex flex-col gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">
                     <h2 className="font-medium">Docente con mayor carga:</h2>
-                    <p>{kpi.maestro} con {kpi.grupos} grupos y {kpi.alumnos} alumnos</p>
+                    <p className="text-sm">{kpi.nombre} con un promedio de {kpi.promedio_gastado}, su última compra fue en {kpi.ultima_compra.toDateString()} alumnos</p>
                 </div>
             </div>
 

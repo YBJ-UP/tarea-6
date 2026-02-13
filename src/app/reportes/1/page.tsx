@@ -17,8 +17,8 @@ export default async function reporte_1 (props: { searchParams?:Promise<{[key:st
         <div className="flex flex-col m-10">
             <div className="flex gap-20 items-center">
                 <div>
-                    <h1 className="text-2xl font-bold">Rendimiento del curso</h1>
-                    <p>Promedio general del curso y número de reprobados.</p>
+                    <h1 className="text-2xl font-bold">Rendimiento de productos</h1>
+                    <p>La cantidad de productos que se han venido, así como su estado.</p>
                 </div>
                 
                 <div className=" flex gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">

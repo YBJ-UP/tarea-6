@@ -2,18 +2,17 @@ import { query } from "@/lib/db";
 import z from "zod"
 import { paginado, paginaSchema } from "./pagina";
 
-export const reporte2Schema = z.object({
-    nombre: z.string().min(1),
-    email: z.string().min(1).max(100),
-    total_gastado: z.number().min(1),
-    promedio_gastado: z.number().min(0.0),
-    compras_realizadas: z.number().min(0),
-    ultima_compra: z.date()
+export const reporte3Schema = z.object({
+    categoria: z.string().min(1),
+    ordenes_totales: z.number().min(0),
+    ordenes_canceladas: z.number().min(0),
+    total_generado: z.number().min(0),
+    promedio_exitos: z.number().min(0.0)
 })
 
-export type reporte2Type = z.infer<typeof reporte2Schema>
+export type reporte3Type = z.infer<typeof reporte3Schema>
 
-export async function getReporte2(props: { searchParams?:Promise<{[key:string]: string}> }):Promise<paginado> {
+export async function getReporte3(props: { searchParams?:Promise<{[key:string]: string}> }):Promise<paginado> {
     const searchParams = await props.searchParams
 
     const paginaUnparsed:{page:string} = {page: searchParams?.page || '1'}
@@ -22,7 +21,7 @@ export async function getReporte2(props: { searchParams?:Promise<{[key:string]: 
     const limite = 5
     const offset = (page-1)*limite
 
-    const filtro = searchParams?.nombre || ''
+    const filtro = searchParams?.categoria || ''
 
     try {
         let totalFilas
@@ -31,14 +30,14 @@ export async function getReporte2(props: { searchParams?:Promise<{[key:string]: 
         let res
 
         if (filtro) {
-            res = await query("SELECT * FROM vw_ventas_usuarios WHERE nombre ILIKE $3 LIMIT $1 OFFSET $2;", [limite,offset, `%${filtro}%`])
-            totalFilas = await query('SELECT COUNT(*) FROM vw_ventas_usuarios WHERE nombre ILIKE $1;', [`%${filtro}%`])
+            res = await query("SELECT * FROM vw_ventas_categorias WHERE categoria = $3 LIMIT $1 OFFSET $2;", [limite,offset, filtro])
+            totalFilas = await query('SELECT COUNT(*) FROM vw_ventas_categorias WHERE categoria = $1;', [filtro])
         } else {
-            res = await query('SELECT * FROM vw_ventas_usuarios LIMIT $1 OFFSET $2;', [limite,offset])
-            totalFilas = await query('SELECT COUNT(*) FROM vw_ventas_usuarios;')
+            res = await query('SELECT * FROM vw_ventas_categorias LIMIT $1 OFFSET $2;', [limite,offset])
+            totalFilas = await query('SELECT COUNT(*) FROM vw_ventas_categorias;')
         }
 
-        const rows:reporte2Type[] = res.rows
+        const rows:reporte3Type[] = res.rows
 
         totalFilasBien = parseInt(totalFilas.rows[0].count)
         totalPaginas = Math.ceil(totalFilasBien/limite)
@@ -69,6 +68,19 @@ export async function getKPI() {
         }
         const kpi = res.rows[0]
         return kpi
+    } catch (error:any) {
+        throw new Error(error.message)
+    }
+}
+
+export async function getCategorias() {
+    try {
+        const res = await query('SELECT DISTINCT categoria FROM vw_ventas_categorias;')
+        if (!res.rows) {
+            throw new Error('Error al conseguir los datos')
+        }
+        const categorias:{categoria:string}[] = res.rows
+        return categorias
     } catch (error:any) {
         throw new Error(error.message)
     }
