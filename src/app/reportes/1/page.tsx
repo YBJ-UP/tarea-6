@@ -22,8 +22,8 @@ export default async function reporte_1 (props: { searchParams?:Promise<{[key:st
                 </div>
                 
                 <div className=" flex gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">
-                    <h2 className="font-medium">Promedio más alto:</h2>
-                    <p>{kpi.promedio} del {kpi.periodo}° periodo de {kpi.programa}</p>
+                    <h2 className="font-medium">Producto más vendido:</h2>
+                    <p>{kpi.nombre} con {kpi.unidades_vendidas} unidades vendias</p>
                 </div>
             </div>
 
@@ -31,15 +31,16 @@ export default async function reporte_1 (props: { searchParams?:Promise<{[key:st
                 <Filtrado categorias={categorias}/>
             </Suspense>
 
-            <div className="grid grid-cols-5 items-center border-2 border-amber-50 p-2">
-                <p>CURSO</p>
-                <p>PERIODO</p>
-                <p>PROGRAMA</p>
-                <p>PROMEDIO</p>
-                <p>REPROBADOS</p>
+            <div className="grid grid-cols-6 items-center border-2 border-amber-50 p-2">
+                <p>CATEGORIA</p>
+                <p>PRODUCTO</p>
+                <p>STOCK DISPONIBLE</p>
+                <p>PRECIO</p>
+                <p>UNIDADES VENDIDAS</p>
+                <p>ESTADO</p>
             </div>
             {data.map((rep:reporte1Type, key:number) => (
-                <div key={key} className="grid grid-cols-5 items-center border-2 border-amber-50 p-2">
+                <div key={key} className="grid grid-cols-6 items-center border-2 border-amber-50 p-2">
                     <p>{rep.categoria}</p>
                     <p>{rep.nombre}</p>
                     <p>{rep.stock_disponible}</p>

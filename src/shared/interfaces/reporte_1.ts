@@ -75,7 +75,14 @@ export async function getCategorias() {
 }
 
 export async function getKPI() {
-    let kpi:any
-
-    return kpi
+    try {
+        const res = await query('SELECT nombre, unidades_vendidas FROM vw_stock_vendido ORDER BY unidades_vendidas DESC LIMIT 1;')
+        if (!res.rows) {
+            throw new Error('Error al obtener la KPI')
+        }
+        const kpi = res.rows[0]
+        return kpi
+    } catch (error:any) {
+        throw new Error(error.message)
+    }
 }

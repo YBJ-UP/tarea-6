@@ -21,8 +21,8 @@ export default function filtrado ({categorias}:{categorias:{categoria:string}[]}
     return (
         <div className="flex gap-15 my-5">
             <div className="flex gap-5 items-center">
-                <label htmlFor="programa">Seleccionar programa:</label>
-                <select name="programa" id="programa" className="bg-black border-2 rounded-2xl px-5 py-2" onChange={(e) => {manejarPrograma(e.target.value.trim())}}>
+                <label htmlFor="categoria">Seleccionar categoria:</label>
+                <select name="categoria" id="categoria" className="bg-black border-2 rounded-2xl px-5 py-2" onChange={(e) => {manejarPrograma(e.target.value.trim())}}>
                     <option value="">-</option>
                     {categorias.map((categoria, key:number) => (
                         <option key={key} value={categoria.categoria}>{categoria.categoria}</option>

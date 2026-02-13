@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface paginaInterfaz {
@@ -5,7 +7,7 @@ interface paginaInterfaz {
     paginasTotales: number
 }
 
-export default async function paginacion({ paginaActual, paginasTotales }:paginaInterfaz) {
+export default function paginacion({ paginaActual, paginasTotales }:paginaInterfaz) {
     const parametros = useSearchParams()
     const params = new URLSearchParams(parametros)
     const ruta = usePathname()
@@ -24,7 +26,7 @@ export default async function paginacion({ paginaActual, paginasTotales }:pagina
     }
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-5">
             <div className="grid grid-cols-3 justify-center gap-6">
                 <div>
                     { !primeraPagina && <button onClick={paginaAnterior}>Página anterior</button> }
