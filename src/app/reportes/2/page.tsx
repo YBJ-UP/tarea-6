@@ -1,6 +1,6 @@
 import { getKPI, paginarRep2, reporte2 } from "@/shared/interfaces/reporte_2"
 import { paginaSchema } from "@/shared/interfaces/pagina"
-import Paginacion from "@/components/paginacion"
+import Paginacion from "@/components/ui/paginacion"
 
 export const dynamic='force-dynamic'
 

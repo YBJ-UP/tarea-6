@@ -1,5 +1,5 @@
-import Paginacion from "@/components/paginacion"
-import Busqueda from "@/components/busqueda"
+import Paginacion from "@/components/ui/paginacion"
+import Busqueda from "@/components/ui/busqueda"
 import { Suspense } from "react"
 import { getKPI, paginarRep3, reporte3Type } from "@/shared/interfaces/reporte_3"
 

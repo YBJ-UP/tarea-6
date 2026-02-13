@@ -1,4 +1,4 @@
-import Filtrado from "@/components/filtrado";
+import Filtrado from "@/components/ui/filtrado";
 import { getKPI, getProgramas, getReporte1, reporte1 } from "@/shared/interfaces/reporte_1";
 import { Suspense } from "react";
 
