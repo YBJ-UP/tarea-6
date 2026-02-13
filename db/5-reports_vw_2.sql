@@ -9,7 +9,7 @@ CREATE OR REPLACE VIEW vw_ventas_usuarios AS
         u.nombre,
         u.email,
         COALESCE( SUM( o.total ), 0 ) AS total_gastado,
-        COALESCE( ROUND( AVG( o.total ), 2 ), 0 ) AS promedio_gastado
+        COALESCE( ROUND( AVG( o.total ), 2 ), 0 ) AS promedio_gastado,
         COUNT( DISTINCT o.id ) AS compras_realizadas,
         MAX( o.created_at ) AS ultima_compra
     FROM usuarios u
