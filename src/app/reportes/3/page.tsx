@@ -24,9 +24,9 @@ export default async function reporte_3 (props: { searchParams?:Promise<{[key:st
                         <p>Las categorías ordenadas según la cantidad de órdenes que ha recibido.</p>
                     </div>
                     
-                    <div className="flex flex-col gap-2 items-center rounded-2xl text-xl bg-red-700 p-5">
-                        <h2 className="font-medium">Alumno con el promedio más bajo:</h2>
-                        <p className="text-sm">{kpi.nombre} ({kpi.correo}) con {kpi.promedio_calificaciones}</p>
+                    <div className="flex flex-col gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">
+                        <h2 className="font-medium">Categoría más popular:</h2>
+                        <p className="text-sm">{kpi.categoria} con {kpi.ordenes_totales} ordenes, generando ${kpi.total_generado}</p>
                     </div>
                 </div>
 

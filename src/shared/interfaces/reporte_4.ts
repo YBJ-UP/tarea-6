@@ -69,7 +69,7 @@ export async function getReporte4(props: { searchParams?:Promise<{[key:string]: 
 
 export async function getKPI() {
     try {
-        const res = await query('SELECT producto, categoria, total_generado FROM vw_ranking_productos ORDER BY total_generado DESC LIMIT 1;')
+        const res = await query('SELECT producto, total_generado FROM vw_ranking_productos ORDER BY total_generado DESC LIMIT 1;')
         if (!res.rows) {
             throw new Error('Error al obtener la KPI')
         }

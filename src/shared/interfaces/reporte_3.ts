@@ -62,7 +62,7 @@ export async function getReporte3(props: { searchParams?:Promise<{[key:string]: 
 
 export async function getKPI() {
     try {
-        const res = await query('SELECT nombre, promedio_gastado, ultima_compra FROM vw_ventas_usuarios ORDER BY promedio_gastado DESC LIMIT 1;')
+        const res = await query('SELECT categoria, ordenes_totales, total_generado FROM vw_ventas_categorias ORDER BY total_generado DESC LIMIT 1;')
         if (!res.rows) {
             throw new Error('Error al obtener la KPI')
         }

@@ -21,8 +21,8 @@ export default async function reporte_2 (props: { searchParams?:Promise<{[key:st
                 </div>
                 
                 <div className="flex flex-col gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">
-                    <h2 className="font-medium">Docente con mayor carga:</h2>
-                    <p className="text-sm">{kpi.nombre} con un promedio de {kpi.promedio_gastado}, su última compra fue en {kpi.ultima_compra.toDateString()} alumnos</p>
+                    <h2 className="font-medium">Mejor comprador:</h2>
+                    <p className="text-sm">{kpi.nombre} con un promedio de ${kpi.promedio_gastado}, su última compra fue en {kpi.ultima_compra.toDateString()}</p>
                 </div>
             </div>
 
