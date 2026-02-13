@@ -6,7 +6,7 @@
 --  Se utiliza GROUP BY para que agrupe filas con los mismos valores segun lo que se especifica
 CREATE OR REPLACE VIEW vw_stock_vendido AS
     SELECT
-        p.codigo,
+        c.nombre as categoria,
         p.nombre,
         p.stock AS stock_disponible,
         p.precio,
@@ -17,9 +17,10 @@ CREATE OR REPLACE VIEW vw_stock_vendido AS
             WHEN COALESCE( SUM( od.cantidad ), 0 ) = 0 THEN 'SIN VENTAS'
             ELSE 'NORMAL'
         END AS estado
-    FROM productos p
-    JOIN orden_detalles od ON p.id = od.producto_id
-    GROUP BY p.codigo, p.nombre, p.stock, p.precio
+    FROM categorias c
+    JOIN productos p ON c.id = p.categoria_id
+    LEFT JOIN orden_detalles od ON p.id = od.producto_id
+    GROUP BY c.nombre, p.nombre, p.stock, p.precio
     ORDER BY p.stock DESC;
 
 SELECT * FROM vw_stock_vendido;
