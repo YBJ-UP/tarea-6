@@ -1,10 +1,10 @@
---REPORTE 1
+--REPORTE 2
 --¿Qué devuelve? Los usuarios que han realizado compras, sin importar el estado de estas, pero si estan canceladas o pendientes que se muestre algo
 --Grain: Cada fila es un usuario
 --Métricas: Cantidad de compras realizadas y el dinero gastado
 --¿Por qué GROUP BY/HAVING?
 --  Se utiliza GROUP BY para que agrupe filas con los mismos valores segun lo que se especifica
--- Se utiliza HAVING para asegurarse de que
+--  Se utiliza HAVING para asegurarse de que
 CREATE OR REPLACE VIEW vw_ventas_usuarios AS
     SELECT
         u.nombre,
