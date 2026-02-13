@@ -1,20 +1,19 @@
-import { getKPI, paginarRep2, reporte2 } from "@/shared/interfaces/reporte_2"
-import { paginaSchema } from "@/shared/interfaces/pagina"
+import { getKPI, getReporte2, reporte2Type } from "@/shared/interfaces/reporte_2"
 import Paginacion from "@/components/ui/paginacion"
+import Busqueda from "@/components/ui/busqueda"
 
 export const dynamic='force-dynamic'
 
-export default async function reporte_2 ({ searchParams }: { searchParams:{[key:string]: string} }) {
-    const paginaUnparsed = await searchParams
-    const paginaParsed = paginaSchema.parse(paginaUnparsed)
+export default async function reporte_2 (props: { searchParams?:Promise<{[key:string]: string}> }) {
     const kpi = await getKPI()
-    const res = await paginarRep2(paginaParsed)
+    const res = await getReporte2(props)
     if (!res.ok) {
         throw new Error(res.mensaje)
     }
     const { data, pagination } = res
     return (
         <div className="m-10">
+
             <div className="flex gap-20 items-center">
                 <div>
                     <h1 className="text-2xl font-bold">Carga del maestro</h1>
@@ -27,26 +26,30 @@ export default async function reporte_2 ({ searchParams }: { searchParams:{[key:
                 </div>
             </div>
 
+            <Busqueda />
+
             <div className="my-5">
-                <div className="grid grid-cols-5 items-center border-2 border-amber-50 p-2">
-                    <p>Maestro</p>
-                    <p>Periodo</p>
-                    <p>Grupos</p>
-                    <p>Alumnos</p>
-                    <p>Promedio</p>
+                <div className="grid grid-cols-6 items-center border-2 border-amber-50 p-2">
+                    <p>Nombre</p>
+                    <p>Correo</p>
+                    <p>Total gastado</p>
+                    <p>Promedio gastado</p>
+                    <p>Compras totales</p>
+                    <p>Última compra</p>
                 </div>
-                {data.map((dato:reporte2, key:number) => (
-                    <div key={key} className="grid grid-cols-5 items-center border-2 border-amber-50 p-2">
-                        <p>{dato.maestro}</p>
-                        <p>{dato.periodo}</p>
-                        <p>{dato.grupos}</p>
-                        <p>{dato.alumnos}</p>
-                        <p>{dato.promedio}</p>
+                {data.map((dato:reporte2Type, key:number) => (
+                    <div key={key} className="grid grid-cols-6 items-center border-2 border-amber-50 p-2">
+                        <p>{dato.nombre}</p>
+                        <p>{dato.email}</p>
+                        <p>{dato.total_gastado}</p>
+                        <p>{dato.promedio_gastado}</p>
+                        <p>{dato.compras_realizadas}</p>
+                        <p>{dato.ultima_compra.toDateString()}</p>
                     </div>
                 ))}
             </div>
 
-            <Paginacion paginaActual={pagination.pagina} paginasTotales={pagination.totalPaginas} ruta="/reportes/2"/>
+            <Paginacion paginaActual={pagination.pagina} paginasTotales={pagination.totalPaginas} />
         </div>
     )
 }
