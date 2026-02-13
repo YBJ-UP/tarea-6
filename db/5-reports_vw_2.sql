@@ -16,4 +16,6 @@ CREATE OR REPLACE VIEW vw_ventas_usuarios AS
     JOIN ordenes o ON u.id = o.usuario_id
     GROUP BY u.nombre, u.email
     HAVING COUNT( DISTINCT o.id ) > 0
-    ORDER BY COALESCE( SUM( o.total ), 0 );
+    ORDER BY COALESCE( SUM( o.total ), 0 ) DESC;
+
+SELECT * FROM vw_ventas_usuarios;
