@@ -23,3 +23,13 @@ CREATE OR REPLACE VIEW vw_usuarios_pagudos AS
     HAVING SUM( o.total ) > (SELECT total_gastado FROM promedio_tienda);
 
 SELECT * FROM vw_usuarios_pagudos;
+
+
+--REPORTE 5.1
+--¿Qué devuelve? Devuelve el promedio de todas las compras realizadas, solo se usa para la KPI ya que no sé como sacarlo del WITH del reporte 5
+CREATE OR REPLACE VIEW vw_usuarios_pagudos_kpi AS
+    SELECT
+        ROUND( AVG( o.total ), 2 ) as promedio_total
+    FROM ordenes o;
+
+SELECT * FROM vw_usuarios_pagudos_kpi;
