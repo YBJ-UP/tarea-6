@@ -11,7 +11,6 @@ CREATE OR REPLACE VIEW vw_stock_vendido AS
         p.stock AS stock_disponible,
         p.precio,
         COALESCE( SUM( od.cantidad ), 0 ) AS unidades_vendidas,
-        p.precio * COALESCE( SUM( od.cantidad ), 0 ) AS dinero_generado,
         CASE
             WHEN p.stock = 0 THEN 'AGOTADO'
             WHEN p.stock < 50 THEN 'BAJO'
