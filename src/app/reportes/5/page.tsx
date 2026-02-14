@@ -1,4 +1,4 @@
-import Filtrado from "@/components/filtrado"
+import Filtrado from "@/components/ui/filtrado"
 import { getKPI, getProgramas, getReporte5, reporte5Type } from "@/shared/interfaces/reporte_5"
 
 export const dynamic = 'force-dynamic'
@@ -11,8 +11,8 @@ export default async function reporte_5 (props: { searchParams?:Promise<{[key:st
         <div className="m-10">
             <div className="flex gap-20 items-center mb-5">
                 <div>
-                    <h1 className="text-2xl font-bold">Tablero de estudiantes</h1>
-                    <p>Ordena a los alumnos según sus calificaciones, los separa por programa educativo.</p>
+                    <h1 className="text-2xl font-bold">Usuarios mayores al promedio</h1>
+                    <p>Un promedio de cuanto han gastado todos los usuarios y quiénes han gastado más que eso.</p>
                 </div>
                 
                 <div className=" flex flex-col gap-2 items-center rounded-2xl text-xl bg-emerald-700 p-5">
