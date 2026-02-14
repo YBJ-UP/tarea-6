@@ -51,7 +51,10 @@ QUERY PLAN
 (18 rows)
 ```
 ### Explicación
-noc
+1. Seq scan lee las tablas
+2. Hace los Joins necesarios
+3. Escanea las tablas que se van a unir
+4. Ordena los datos con *quicksort*
 ## Reporte 2
 ```
                                                             QUERY PLAN
