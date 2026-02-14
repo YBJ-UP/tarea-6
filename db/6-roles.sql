@@ -14,4 +14,5 @@ GRANT SELECT ON vw_ventas_usuarios TO moderador;
 GRANT SELECT ON vw_ventas_categorias TO moderador;
 GRANT SELECT ON vw_ranking_productos TO moderador;
 GRANT SELECT ON vw_usuarios_pagudos TO moderador;
+GRANT SELECT ON vw_usuarios_pagudos_kpi TO moderador;
 -- dar permiso para los reportes (cuando los haga)
